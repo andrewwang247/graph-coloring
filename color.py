@@ -40,7 +40,9 @@ def create_graph(filename: str) -> Graph:
               help='The file containing the graph specification.')
 @click.option('--colors', '-c', required=True, type=int,
               help='The number of colors to use.')
-def main(filename: str, colors: int):
+@click.option('--useall', '-a', is_flag=True, default=False,
+              help='Use at least one of each color. Off by default.')
+def main(filename: str, colors: int, useall: bool):
     """Check whether graph is colorable."""
     assert colors > 0, 'Requires at least 1 color.'
     graph = create_graph(filename)
@@ -49,7 +51,7 @@ def main(filename: str, colors: int):
     print(f'Graph with {num_vertices} vertices, {num_edges} edges.')
     for vert_1, vert_2 in graph.edge_set:
         print(f'{{{vert_1}, {vert_2}}}')
-    colorings = graph.colorings(colors)
+    colorings = graph.colorings(colors, useall)
     print(f'\nThere are {sum(1 for _ in colorings)} {colors}-colorings.')
 
 

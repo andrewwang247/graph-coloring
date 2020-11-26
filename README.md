@@ -12,6 +12,7 @@ Options:
                         [required]
 
   -c, --colors INTEGER  The number of colors to use.  [required]
+  -a, --useall          Use at least one of each color. Off by default.
   --help                Show this message and exit.
 ```
 
