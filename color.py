@@ -13,23 +13,24 @@ def create_graph(filename: str) -> Graph:
     """Create graph from file."""
     num_edges = 0
     with open(filename) as fin:
+        first_tokens: List[str] = fin.readline().strip().split()
+        assert len(first_tokens) == 4
+        assert first_tokens[0] == 'p'
+        assert first_tokens[1] == 'color'
+        graph = Graph(int(first_tokens[2]))
+        edges = int(first_tokens[3])
         for line in fin:
             tokens: List[str] = line.strip().split()
             identifier = tokens[0]
-            if identifier == 'c':
-                continue
-            if identifier == 'p':
-                assert tokens[1] == 'color'
-                assert len(tokens) == 4
-                graph = Graph(int(tokens[2]))
-                edges = int(tokens[3])
-            elif identifier == 'e':
+            assert identifier in ('c', 'e'), \
+                f'Unrecognized identifer: {identifier}'
+            if identifier == 'e':
                 assert len(tokens) == 3
                 left = int(tokens[1])
                 right = int(tokens[2])
                 graph.add_edge(left, right)
                 num_edges += 1
-    assert edges == num_edges, 'Incorrect number of edges specified.'
+    assert edges == num_edges, f'Expected {edges} edges, but got {num_edges}.'
     return graph
 
 
