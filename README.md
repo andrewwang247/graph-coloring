@@ -1,6 +1,6 @@
 # Graph Coloring
 
-Enumeration of proper vertex colorings on an undirected graph.
+Enumeration of proper vertex colorings on an undirected graph. Requires Python 3.8 or later.
 
 ```text
 Usage: color.py [OPTIONS]
@@ -37,7 +37,7 @@ e 2 1
 Saving this information into a file `tmp.txt`, we then execute the coloring program.
 
 ```test
-$ python3 color.py -f tmp.txt -c 5
+$ python color.py -f tmp.txt -c 5
 Graph with 4 vertices, 3 edges.
 {0, 1}
 {1, 3}

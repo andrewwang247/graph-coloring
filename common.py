@@ -3,9 +3,23 @@ Common utilities for testing.
 
 Copyright 2020. Siwei Wang.
 """
-from typing import Tuple, List
+from typing import Iterable, Tuple, List
+from math import comb
 from itertools import product
 from graph import Graph
+
+
+def len_iter(iterable: Iterable) -> int:
+    """Count number of entries in iterable."""
+    return sum(1 for _ in iterable)
+
+
+def check_surjective(graph: Graph, colors: int, num_colorings: int) -> bool:
+    """Apply the relation between surjective colorings."""
+    num_surjective = sum(comb(colors, sub_colors)
+                         * len_iter(graph.colorings(sub_colors, True))
+                         for sub_colors in range(colors + 1))
+    return num_colorings == num_surjective
 
 
 def parameters(vertex_max: int, color_max: int, non_zero: bool = False) \

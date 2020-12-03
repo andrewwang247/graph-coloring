@@ -6,7 +6,7 @@ Copyright 2020. Siwei Wang.
 from functools import reduce
 from operator import mul
 from pytest import mark
-from common import create_kn, parameters
+from common import create_kn, parameters, len_iter, check_surjective
 
 
 def expected(vertices: int, colors: int) -> int:
@@ -21,5 +21,6 @@ def test_complete(vertices: int, colors: int):
     """Test complete graph colorings."""
     graph = create_kn(vertices)
     colorings = graph.colorings(colors)
-    num_colorings = sum(1 for _ in colorings)
+    num_colorings = len_iter(colorings)
     assert num_colorings == expected(vertices, colors)
+    assert check_surjective(graph, colors, num_colorings)

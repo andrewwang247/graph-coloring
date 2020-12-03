@@ -4,7 +4,7 @@ Test colorings for cycle graphs.
 Copyright 2020. Siwei Wang.
 """
 from pytest import mark
-from common import parameters, create_cycle
+from common import parameters, create_cycle, len_iter, check_surjective
 
 
 def expected(vertices: int, colors: int) -> int:
@@ -17,5 +17,6 @@ def test_cycle(vertices: int, colors: int):
     """Test path cycle colorings."""
     graph = create_cycle(vertices)
     colorings = graph.colorings(colors)
-    num_colorings = sum(1 for _ in colorings)
+    num_colorings = len_iter(colorings)
     assert num_colorings == expected(vertices, colors)
+    assert check_surjective(graph, colors, num_colorings)

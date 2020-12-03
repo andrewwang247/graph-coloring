@@ -32,7 +32,7 @@ class Graph:
         self.edge_set.add((min(vert_1, vert_2), max(vert_1, vert_2)))
 
     def _is_proper_coloring(self, coloring: Tuple[int, ...]) -> bool:
-        """Checks whether the given coloring is proper."""
+        """Check whether the given coloring is proper."""
         return all(coloring[vert_1] != coloring[vert_2]
                    for vert_1, vert_2 in self.edge_set)
 
