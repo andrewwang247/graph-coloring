@@ -11,7 +11,7 @@ from graph import Graph
 
 def create_graph(filename: str) -> Graph:
     """Create graph from file."""
-    with open(filename) as fin:
+    with open(filename, encoding='UTF-8') as fin:
         first_tokens: List[str] = fin.readline().strip().split()
         assert len(first_tokens) == 4
         assert first_tokens[0] == 'p'
